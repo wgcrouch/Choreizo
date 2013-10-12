@@ -1,0 +1,5 @@
+choreizo_base:
+    resource: "@ChoreizoBaseBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
