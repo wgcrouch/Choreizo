@@ -1,9 +1,8 @@
-choreizo_api:
-    resource: "@ChoreizoApiBundle/Resources/config/routing.yml"
-    prefix:   /api
-
 choreizo_base:
     resource: "@ChoreizoBaseBundle/Resources/config/routing.yml"
     prefix:   /
 
-
+choreizo_api:
+    resource: "@ChoreizoApiBundle/Resources/config/routing.yml"
+    prefix:   /api
+    type: rest

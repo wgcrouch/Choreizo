@@ -1,3 +1,4 @@
-choreizo_api_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ChoreizoApiBundle:Default:index }
+test:
+    type:     rest
+    resource: Choreizo\Bundle\ApiBundle\Controller\TestController
+    name_prefix: chorizo_api_
