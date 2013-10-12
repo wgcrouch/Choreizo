@@ -1,0 +1,7 @@
+parameters:
+#    choreizo_api.example.class: Choreizo\Bundle\ApiBundle\Example
+
+services:
+#    choreizo_api.example:
+#        class: %choreizo_api.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

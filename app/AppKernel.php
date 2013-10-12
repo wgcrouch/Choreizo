@@ -18,7 +18,9 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Choreizo\Bundle\BaseBundle\ChoreizoBaseBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle()
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Choreizo\Bundle\ApiBundle\ChoreizoApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
