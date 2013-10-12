@@ -20,6 +20,7 @@ framework:
     session:         ~
     fragments:       ~
     http_method_override: true
+    translator:      { fallback: en }
 
 # Twig Configuration
 twig:
@@ -83,3 +84,9 @@ fos_rest:
         codes:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
             'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Choreizo\Bundle\BaseBundle\Entity\User
+
