@@ -23,6 +23,12 @@ class CurrentuserController extends FOSRestController
         return $user;
 
 	}
+
+    public function getCurrentuserChoresAction(Request $request) {
+        $user = $this->getCurrentUser();
+        return $user->getTodoChores();
+    }
+
     public function getCurrentuserAction() 
     {
         return $this->getCurrentUser();

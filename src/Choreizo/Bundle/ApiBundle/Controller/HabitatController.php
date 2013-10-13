@@ -41,8 +41,12 @@ class HabitatController extends FOSRestController
             $children = $form->all();
             $data = array_intersect_key($request->request->all(), $children);
             $form->bind($data);
-            $chore->setTargetUser(new User($user));
+            $user = $this->getDoctrine()
+                ->getRepository('ChoreizoBaseBundle:User')
+                ->findOneById($user);
+            $chore->setTargetUser($user);
             $chore->setCompleted(false);
+            $chore->setHabitat($habitat);
             $currentUser = $this->get('security.context')->getToken()->getUser();
             if (!$currentUser instanceof User) {
                 $currentUser = $this->getDoctrine()
@@ -54,10 +58,10 @@ class HabitatController extends FOSRestController
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($chore);
-                $em->flush();
-                return $chore->getId();
+                
             }
-            return $form;
         }
+        $em->flush();
+        return array("Moo");
     }
 }

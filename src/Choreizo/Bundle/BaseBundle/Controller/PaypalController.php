@@ -32,7 +32,7 @@ class PaypalController extends Controller
         	->getRepository('ChoreizoBaseBundle:User')
         	->findOneByEmail($userInfo->email);
 
-        $location = 'http://choreizo.localhost/a/index.html#/dashboard';
+        $location = 'http://choreizo.localhost/a/index.html#/people';
 
 	    if (!$user) {
 	        $user = $this->registerUser($userInfo, $token);
@@ -43,6 +43,10 @@ class PaypalController extends Controller
             $user->setFirstName($userInfo->given_name);
             $user->setLastName($userInfo->family_name);
             $user->setInvite(false);
+        }
+
+        if (!$user->getHabitat()) {
+            $location = 'http://choreizo.localhost/a/index.html#/register';
         }
 
         $em = $this->getDoctrine()->getManager();
