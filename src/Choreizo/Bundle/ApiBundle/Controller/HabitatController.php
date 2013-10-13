@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Choreizo\Bundle\BaseBundle\Form\ChoreForm;
 
-use Symfony\Component\HttpFoundation\Session\Session;
-
 /**
  * Test controller for the api
  */
