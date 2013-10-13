@@ -1,6 +1,6 @@
 <?php
 namespace Choreizo\Bundle\BaseBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

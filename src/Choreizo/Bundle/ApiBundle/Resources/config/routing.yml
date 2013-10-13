@@ -13,3 +13,7 @@ user:
 chore:
     type:     rest
     resource: Choreizo\Bundle\ApiBundle\Controller\ChoreController
+current_user:
+    type:     rest
+    resource: Choreizo\Bundle\ApiBundle\Controller\CurrentuserController
+    name_prefix: chorizo_api_

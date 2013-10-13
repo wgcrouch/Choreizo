@@ -32,10 +32,10 @@ class PaypalController extends Controller
         	->getRepository('ChoreizoBaseBundle:User')
         	->findOneByEmail($userInfo->email);
 
-        $location = 'http://choreizo-ui.localhost/#/dashboard';
+        $location = 'http://choreizo.localhost/a/index.html#/dashboard';
 	    if (!$user) {
 	        $user = $this->registerUser($userInfo, $token);
-            $location = 'http://choreizo-ui.localhost/#/register';
+            $location = 'http://choreizo.localhost/a/index.html#/register';
 	    }
 
         $em = $this->getDoctrine()->getManager();

@@ -5,26 +5,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-/**
- * Form for tickets in the API
- */
-class ChoreForm extends ApiForm
+class UserForm extends ApiForm
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')
-            //->add('target_user')
-            ->add('deadline', 'datetime', array(
-                'widget' => 'single_text',
-            ))
-            ->add('fine_amount');
+        $builder->add('first_name')
+            ->add('last_name');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Choreizo\Bundle\BaseBundle\Entity\Chore',
+                'data_class' => 'Choreizo\Bundle\BaseBundle\Entity\User',
                 'csrf_protection' => false
             )
         );

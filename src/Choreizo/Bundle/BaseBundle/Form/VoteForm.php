@@ -1,11 +1,11 @@
 <?php
 namespace Choreizo\Bundle\BaseBundle\Form;
-
+use Choreizo\Bundle\BaseBundle\Form\ApiForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class VoteForm extends AbstractType
+class VoteForm extends ApiForm
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

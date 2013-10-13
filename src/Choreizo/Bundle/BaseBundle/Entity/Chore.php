@@ -1,7 +1,6 @@
 <?php
 
 namespace Choreizo\Bundle\BaseBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
