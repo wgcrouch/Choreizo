@@ -1,7 +1,10 @@
 parameters:
-#    choreizo_base.example.class: Choreizo\Bundle\BaseBundle\Example
+    choreizo_base.paypal_client_id: 
+    choreizo_base.paypal_client_secret: 
+    choreizo_base.client_class: Guzzle\Http\Client
+    choreizo_base.paypal_class: Choreizo\Bundle\BaseBundle\Service\Paypal
 
 services:
-#    choreizo_base.example:
-#        class: %choreizo_base.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    paypal:
+        class: %choreizo_base.paypal_class%
+        arguments: [%choreizo_base.paypal_client_id%, %choreizo_base.paypal_client_secret%]

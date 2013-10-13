@@ -24,5 +24,8 @@ class ChoreizoBaseExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter("choreizo_base.paypal_client_id", $config['paypal_client_id']);
+        $container->setParameter("choreizo_base.paypal_client_secret", $config['paypal_client_secret']);
     }
 }
