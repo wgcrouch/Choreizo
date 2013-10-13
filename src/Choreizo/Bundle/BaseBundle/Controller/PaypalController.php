@@ -68,7 +68,7 @@ class PaypalController extends Controller
         $user->setEmail($userInfo->email);
         $user->setFirstName($userInfo->given_name);
         $user->setLastName($userInfo->family_name);
-
+        $user->setGravatar(md5(strtolower(trim($userInfo->email))));
         $factory = $this->get('security.encoder_factory');
 
         $encoder = $factory->getEncoder($user);

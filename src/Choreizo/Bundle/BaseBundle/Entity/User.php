@@ -72,6 +72,10 @@ class User extends BaseUser
      */
     protected $invite;
     
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $gravatar;
 
     public function __construct()
     {
@@ -422,5 +426,28 @@ class User extends BaseUser
     public function getTodoChores()
     {
         return $this->todo_chores;
+    }
+
+    /**
+     * Set gravatar
+     *
+     * @param string $gravatar
+     * @return User
+     */
+    public function setGravatar($gravatar)
+    {
+        $this->gravatar = $gravatar;
+    
+        return $this;
+    }
+
+    /**
+     * Get gravatar
+     *
+     * @return string 
+     */
+    public function getGravatar()
+    {
+        return $this->gravatar;
     }
 }

@@ -40,6 +40,7 @@ class InviteController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $invite->setHabitat($habitat);
             $invite->setUsername($invite->getEmail());
+            $user->setGravatar(md5(strtolower(trim($invite->getEmail()))));
             $factory = $this->get('security.encoder_factory');
 
             $encoder = $factory->getEncoder($user);
