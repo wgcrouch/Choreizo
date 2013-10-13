@@ -40,18 +40,18 @@ class UserController extends FOSRestController
         // get all chores where i'm the target
         $todoChores = $user->getTodoChores();
         foreach ($todoChores as $chore) {
-            if (empty($total[$chore->getUser()->getId()])) {
-                $total[$chore->getUser()->getId()] = 0;
+            if (empty($total[$chore->getTargetUser()->getId()])) {
+                $total[$chore->getTargetUser()->getId()] = 0;
             }
-            $total[$chore->getUser()->getId()] -= $chore->getFineAmount();
+            $total[$chore->getTargetUser()->getId()] -= $chore->getFineAmount();
         }
 
         $created = $user->getCreatedChores();
         foreach ($created as $chore) {
-            if (empty($total[$chore->getUser()->getId()])) {
-                $total[$chore->getUser()->getId()] = 0;
+            if (empty($total[$chore->getTargetUser()->getId()])) {
+                $total[$chore->getTargetUser()->getId()] = 0;
             }
-            $total[$chore->getUser()->getId()] += $chore->getFineAmount();
+            $total[$chore->getTargetUser()->getId()] += $chore->getFineAmount();
         }
         return array('totalChores' => $total);
     }
