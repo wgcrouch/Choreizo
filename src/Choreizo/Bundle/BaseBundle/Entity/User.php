@@ -33,6 +33,16 @@ class User extends BaseUser
     protected $votes;
 
     /**
+     * @ORM\OneToMany(targetEntity="Fine", mappedBy="source_user")
+     */
+    protected $fines;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Fine", mappedBy="target_user")
+     */
+    protected $credits;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $firstName;
@@ -248,5 +258,71 @@ class User extends BaseUser
     public function getRefreshToken()
     {
         return $this->refreshToken;
+    }
+
+    /**
+     * Add fines
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Fine $fines
+     * @return User
+     */
+    public function addFine(\Choreizo\Bundle\BaseBundle\Entity\Fine $fines)
+    {
+        $this->fines[] = $fines;
+    
+        return $this;
+    }
+
+    /**
+     * Remove fines
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Fine $fines
+     */
+    public function removeFine(\Choreizo\Bundle\BaseBundle\Entity\Fine $fines)
+    {
+        $this->fines->removeElement($fines);
+    }
+
+    /**
+     * Get fines
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFines()
+    {
+        return $this->fines;
+    }
+
+    /**
+     * Add credits
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Fine $credits
+     * @return User
+     */
+    public function addCredit(\Choreizo\Bundle\BaseBundle\Entity\Fine $credits)
+    {
+        $this->credits[] = $credits;
+    
+        return $this;
+    }
+
+    /**
+     * Remove credits
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Fine $credits
+     */
+    public function removeCredit(\Choreizo\Bundle\BaseBundle\Entity\Fine $credits)
+    {
+        $this->credits->removeElement($credits);
+    }
+
+    /**
+     * Get credits
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCredits()
+    {
+        return $this->credits;
     }
 }

@@ -17,4 +17,20 @@ class UserController extends FOSRestController
     public function getUserChoresAction(User $user) {
         return $user->getChores();
     }
+
+    public function getUserTotalDebtAction(User $user)
+    {
+        // Get all debt fines
+        $fines = $user->getFines();
+        $total = 0;
+        foreach ($fines as $fine) {
+            $total -= $fine->getAmount();
+        }
+        // add them to all the credits
+        $credits = $user->getCredits();
+        foreach ($credits as $credit) {
+            $total += $credit->getAmount();
+        }
+        return array('total' => $total);
+    }
 }

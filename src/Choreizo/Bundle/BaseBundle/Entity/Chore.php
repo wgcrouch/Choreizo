@@ -67,6 +67,11 @@ class Chore
     protected $votes;
 
     /**
+     * @ORM\OneToMany(targetEntity="Fine", mappedBy="chore")
+     */
+    protected $fines;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -257,5 +262,38 @@ class Chore
     public function getLastVote()
     {
         return $this->votes->last();
+    }
+
+    /**
+     * Add fines
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Fine $fines
+     * @return Chore
+     */
+    public function addFine(\Choreizo\Bundle\BaseBundle\Entity\Fine $fines)
+    {
+        $this->fines[] = $fines;
+    
+        return $this;
+    }
+
+    /**
+     * Remove fines
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Fine $fines
+     */
+    public function removeFine(\Choreizo\Bundle\BaseBundle\Entity\Fine $fines)
+    {
+        $this->fines->removeElement($fines);
+    }
+
+    /**
+     * Get fines
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFines()
+    {
+        return $this->fines;
     }
 }

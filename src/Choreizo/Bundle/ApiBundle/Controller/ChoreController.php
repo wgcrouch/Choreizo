@@ -58,4 +58,9 @@ class ChoreController extends FOSRestController
         }
         return $form;
     }
+
+    public function getChoreFinesAction(Chore $chore)
+    {
+        return $chore->getFines();
+    }
 }
