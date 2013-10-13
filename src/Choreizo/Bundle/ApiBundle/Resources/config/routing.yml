@@ -17,3 +17,7 @@ current_user:
     type:     rest
     resource: Choreizo\Bundle\ApiBundle\Controller\CurrentuserController
     name_prefix: chorizo_api_
+invite:
+    type:     rest
+    resource: Choreizo\Bundle\ApiBundle\Controller\InviteController
+    name_prefix: chorizo_api_

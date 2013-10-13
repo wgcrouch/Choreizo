@@ -33,10 +33,17 @@ class PaypalController extends Controller
         	->findOneByEmail($userInfo->email);
 
         $location = 'http://choreizo.localhost/a/index.html#/dashboard';
+
 	    if (!$user) {
 	        $user = $this->registerUser($userInfo, $token);
-            $location = 'http://choreizo.localhost/a/index.html#/register';
 	    }
+
+        if ($user->getInvite()) {
+            $location = 'http://choreizo.localhost/a/index.html#/register';
+            $user->setFirstName($userInfo->given_name);
+            $user->setLastName($userInfo->family_name);
+            $user->setInvite(false);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $user->setAccessToken($token->access_token);

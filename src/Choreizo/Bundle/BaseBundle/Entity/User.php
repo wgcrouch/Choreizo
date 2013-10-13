@@ -43,12 +43,12 @@ class User extends BaseUser
     protected $credits;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $firstName;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $lastName;
 
@@ -61,6 +61,11 @@ class User extends BaseUser
      * @ORM\Column(type="string", nullable=true)
      */
     protected $refreshToken;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $invite;
     
 
     public function __construct()
@@ -269,7 +274,18 @@ class User extends BaseUser
     public function addFine(\Choreizo\Bundle\BaseBundle\Entity\Fine $fines)
     {
         $this->fines[] = $fines;
-    
+    }
+
+    /**
+     * Set invite
+     *
+     * @param boolean $invite
+     * @return User
+     */
+    public function setInvite($invite)
+    {
+        $this->invite = $invite;
+
         return $this;
     }
 
@@ -324,5 +340,16 @@ class User extends BaseUser
     public function getCredits()
     {
         return $this->credits;
+    }
+
+    /**
+     * Get invite
+     *
+     * @return boolean 
+     */
+    public function getInvite()
+    {
+        return $this->invite;
+
     }
 }
