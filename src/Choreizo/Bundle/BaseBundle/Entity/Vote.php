@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Vote
  *
- * @ORM\Table()
+ * @ORM\Table(name="vote")
  * @ORM\Entity
  */
 class Vote

@@ -19,7 +19,7 @@ class Version20131013074953 extends AbstractMigration
         $this->addSql("CREATE TABLE transaction (id INT AUTO_INCREMENT NOT NULL, amount INT NOT NULL, created DATETIME NOT NULL, processed DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB");
         $this->addSql("ALTER TABLE fine ADD CONSTRAINT FK_1E9BFBACEEB16BFD FOREIGN KEY (source_user_id) REFERENCES fos_user (id)");
         $this->addSql("ALTER TABLE fine ADD CONSTRAINT FK_1E9BFBAC6C066AFE FOREIGN KEY (target_user_id) REFERENCES fos_user (id)");
-        $this->addSql("ALTER TABLE fine ADD CONSTRAINT FK_1E9BFBAC2FC0CB0F FOREIGN KEY (transaction_id) REFERENCES Transaction (id)");
+        $this->addSql("ALTER TABLE fine ADD CONSTRAINT FK_1E9BFBAC2FC0CB0F FOREIGN KEY (transaction_id) REFERENCES transaction (id)");
         $this->addSql("ALTER TABLE fine ADD CONSTRAINT FK_1E9BFBAC6C576F80 FOREIGN KEY (chore_id) REFERENCES chore (id)");
     }
 
