@@ -36,16 +36,22 @@ class UserController extends FOSRestController
 
     public function getUserChoreDebtAction(User $user)
     {
-        $total = 0;
+        $total = array();
         // get all chores where i'm the target
         $todoChores = $user->getTodoChores();
         foreach ($todoChores as $chore) {
-            $total -= $chore->getAmount();
+            if (empty($total[$chore->getUser()->getId()])) {
+                $total[$chore->getUser()->getId()] = 0;
+            }
+            $total[$chore->getUser()->getId()] -= $chore->getFineAmount();
         }
 
         $created = $user->getCreatedChores();
         foreach ($created as $chore) {
-            $total += $chore->getAmount();
+            if (empty($total[$chore->getUser()->getId()])) {
+                $total[$chore->getUser()->getId()] = 0;
+            }
+            $total[$chore->getUser()->getId()] += $chore->getFineAmount();
         }
         return array('totalChores' => $total);
     }
