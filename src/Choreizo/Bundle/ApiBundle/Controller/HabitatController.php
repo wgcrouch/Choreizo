@@ -40,20 +40,27 @@ class HabitatController extends FOSRestController
 
     public function postHabitatChoresAction(Habitat $habitat, Request $request)
     {
-        $chore = new Chore();
-        $form = $this->createForm(new ChoreForm(), $chore);
-        $form->bind($request);
-        $chore->setHabitat($habitat);
-        $chore->setCompleted(false);
-        $user= $this->get('security.context')->getToken()->getUser();
-        $chore->setUser($user);
+        foreach ($request->request->get('users') as $user) {
+            $chore = new Chore();
+            $form = $this->createForm(new ChoreForm(), $chore);
+            $form->bind($request);
+            $chore->setTargetUser(new User($user));
+            $chore->setCompleted(false);
+            $currentUser = $this->get('security.context')->getToken()->getUser();
+            if (!$currentUser instanceof User) {
+                $currentUser = $this->getDoctrine()
+                    ->getRepository('ChoreizoBaseBundle:User')
+                    ->findOneByEmail($currentUser);
+            }
+            $chore->setUser($currentUser);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($chore);
-            $em->flush();
-            return $chore->getId();
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($chore);
+                $em->flush();
+                return $chore->getId();
+            }
+            return $form;
         }
-        return $form;
     }
 }

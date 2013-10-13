@@ -28,10 +28,10 @@ class Chore
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Habitat", inversedBy="chores")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="chores")
      * @var [type]
      */
-    protected $habitat;
+    protected $target_user;
 
     /**
      * @var integer
@@ -294,5 +294,28 @@ class Chore
     public function getFines()
     {
         return $this->fines;
+    }
+
+    /**
+     * Set target_user
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\User $targetUser
+     * @return Chore
+     */
+    public function setTargetUser(\Choreizo\Bundle\BaseBundle\Entity\User $targetUser = null)
+    {
+        $this->target_user = $targetUser;
+    
+        return $this;
+    }
+
+    /**
+     * Get target_user
+     *
+     * @return \Choreizo\Bundle\BaseBundle\Entity\User 
+     */
+    public function getTargetUser()
+    {
+        return $this->target_user;
     }
 }

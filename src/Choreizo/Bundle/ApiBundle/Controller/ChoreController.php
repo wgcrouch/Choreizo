@@ -26,7 +26,7 @@ class ChoreController extends FOSRestController
 
     public function getMyChoresAction(User $user)
     {
-        return $user->getChores();
+        return $user->getCreatedChores();
     }
 
     public function getChoreAction(Chore $chore)

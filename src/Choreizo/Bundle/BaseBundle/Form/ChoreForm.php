@@ -13,7 +13,7 @@ class ChoreForm extends ApiForm
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name')
-            //->add('target_user')
+            ->add('target_user')
             ->add('deadline', 'datetime', array(
                 'widget' => 'single_text',
             ))

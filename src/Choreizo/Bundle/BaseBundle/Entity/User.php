@@ -25,7 +25,12 @@ class User extends BaseUser
     /**
      * @ORM\OneToMany(targetEntity="Chore", mappedBy="user")
      */
-    protected $chores;
+    protected $created_chores;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Chore", mappedBy="target_user")
+     */
+    protected $todo_chores;
 
     /**
      * @ORM\OneToMany(targetEntity="Vote", mappedBy="user")
@@ -351,5 +356,71 @@ class User extends BaseUser
     {
         return $this->invite;
 
+    }
+
+    /**
+     * Add created_chores
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Chore $createdChores
+     * @return User
+     */
+    public function addCreatedChore(\Choreizo\Bundle\BaseBundle\Entity\Chore $createdChores)
+    {
+        $this->created_chores[] = $createdChores;
+    
+        return $this;
+    }
+
+    /**
+     * Remove created_chores
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Chore $createdChores
+     */
+    public function removeCreatedChore(\Choreizo\Bundle\BaseBundle\Entity\Chore $createdChores)
+    {
+        $this->created_chores->removeElement($createdChores);
+    }
+
+    /**
+     * Get created_chores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCreatedChores()
+    {
+        return $this->created_chores;
+    }
+
+    /**
+     * Add todo_chores
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Chore $todoChores
+     * @return User
+     */
+    public function addTodoChore(\Choreizo\Bundle\BaseBundle\Entity\Chore $todoChores)
+    {
+        $this->todo_chores[] = $todoChores;
+    
+        return $this;
+    }
+
+    /**
+     * Remove todo_chores
+     *
+     * @param \Choreizo\Bundle\BaseBundle\Entity\Chore $todoChores
+     */
+    public function removeTodoChore(\Choreizo\Bundle\BaseBundle\Entity\Chore $todoChores)
+    {
+        $this->todo_chores->removeElement($todoChores);
+    }
+
+    /**
+     * Get todo_chores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTodoChores()
+    {
+        return $this->todo_chores;
     }
 }
