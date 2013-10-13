@@ -71,6 +71,11 @@ class Chore
     protected $fines;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Habitat", inversedBy="chores")
+     */
+    protected $habitat;
+
+    /**
      * Get id
      *
      * @return integer 

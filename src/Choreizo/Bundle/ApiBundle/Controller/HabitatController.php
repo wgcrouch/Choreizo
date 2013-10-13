@@ -18,12 +18,7 @@ use Choreizo\Bundle\BaseBundle\Form\ChoreForm;
 class HabitatController extends FOSRestController
 {
 
-    public function getHabitatsAction()
-    {
-        return array('success' => true);
-    }
-
-    public function getHabitatAction(Habitat $habitat)
+    public function getHabitatsAction(Habitat $habitat)
     {
         return $habitat;
     }
@@ -43,7 +38,9 @@ class HabitatController extends FOSRestController
         foreach ($request->request->get('users') as $user) {
             $chore = new Chore();
             $form = $this->createForm(new ChoreForm(), $chore);
-            $form->bind($request);
+            $children = $form->all();
+            $data = array_intersect_key($request->request->all(), $children);
+            $form->bind($data);
             $chore->setTargetUser(new User($user));
             $chore->setCompleted(false);
             $currentUser = $this->get('security.context')->getToken()->getUser();

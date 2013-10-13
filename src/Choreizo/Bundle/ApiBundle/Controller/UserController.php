@@ -33,4 +33,20 @@ class UserController extends FOSRestController
         }
         return array('total' => $total);
     }
+
+    public function getUserChoreDebtAction(User $user)
+    {
+        $total = 0;
+        // get all chores where i'm the target
+        $todoChores = $user->getTodoChores();
+        foreach ($todoChores as $chore) {
+            $total -= $chore->getAmount();
+        }
+
+        $created = $user->getCreatedChores();
+        foreach ($created as $chore) {
+            $total += $chore->getAmount();
+        }
+        return array('totalChores' => $total);
+    }
 }
