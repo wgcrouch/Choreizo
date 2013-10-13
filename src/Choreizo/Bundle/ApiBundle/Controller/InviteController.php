@@ -36,7 +36,6 @@ class InviteController extends FOSRestController
     	$data = array_intersect_key($data, $children);
         $form->bind($data);
         if ($form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
             $invite->setHabitat($habitat);
             $invite->setUsername($invite->getEmail());
