@@ -2,3 +2,14 @@ test:
     type:     rest
     resource: Choreizo\Bundle\ApiBundle\Controller\TestController
     name_prefix: chorizo_api_
+habitat:
+    type:     rest
+    resource: Choreizo\Bundle\ApiBundle\Controller\HabitatController
+    name_prefix: chorizo_api_
+user:
+    type:     rest
+    resource: Choreizo\Bundle\ApiBundle\Controller\UserController
+    name_prefix: chorizo_api_
+chore:
+    type:     rest
+    resource: Choreizo\Bundle\ApiBundle\Controller\ChoreController

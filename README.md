@@ -1,2 +1,8 @@
 Choreizo
 ========
+
+Installation
+------------
+
+    composer install
+
