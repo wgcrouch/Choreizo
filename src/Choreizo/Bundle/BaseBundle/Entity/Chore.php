@@ -62,6 +62,7 @@ class Chore
 
     /**
      * @ORM\OneToMany(targetEntity="Vote", mappedBy="chore")
+     * @ORM\OrderBy({"created" = "DESC"})
      */
     protected $votes;
 
@@ -255,7 +256,6 @@ class Chore
 
     public function getLastVote()
     {
-        //var_dump($this->votes);
-        return $this->votes;
+        return $this->votes->last();
     }
 }
