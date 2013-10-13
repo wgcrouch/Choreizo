@@ -32,6 +32,27 @@ class User extends BaseUser
      */
     protected $votes;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $firstName;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $lastName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $accessToken;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $refreshToken;
+    
+
     public function __construct()
     {
         parent::__construct();
@@ -135,5 +156,97 @@ class User extends BaseUser
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set accessToken
+     *
+     * @param string $accessToken
+     * @return User
+     */
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
+    
+        return $this;
+    }
+
+    /**
+     * Get accessToken
+     *
+     * @return string 
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
+    /**
+     * Set refreshToken
+     *
+     * @param string $refreshToken
+     * @return User
+     */
+    public function setRefreshToken($refreshToken)
+    {
+        $this->refreshToken = $refreshToken;
+    
+        return $this;
+    }
+
+    /**
+     * Get refreshToken
+     *
+     * @return string 
+     */
+    public function getRefreshToken()
+    {
+        return $this->refreshToken;
     }
 }

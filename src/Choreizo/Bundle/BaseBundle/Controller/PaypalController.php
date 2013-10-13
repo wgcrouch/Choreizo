@@ -5,6 +5,12 @@ namespace Choreizo\Bundle\BaseBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Choreizo\Bundle\BaseBundle\Entity\User;
+use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+
+
 class PaypalController extends Controller
 {
     public function indexAction($name)
@@ -22,14 +28,60 @@ class PaypalController extends Controller
 
     	$userInfo = $paypal->get_profile($token->access_token);
     	
-    	$product = $this->getDoctrine()
+    	$user = $this->getDoctrine()
         	->getRepository('ChoreizoBaseBundle:User')
         	->findOneByEmail($userInfo->email);
 
+        $location = 'http://choreizo-ui.localhost/#/dashboard';
 	    if (!$user) {
-	        $user = new User();
+	        $user = $this->registerUser($userInfo, $token);
+            $location = 'http://choreizo-ui.localhost/#/register';
 	    }
 
-    	
+        $em = $this->getDoctrine()->getManager();
+        $user->setAccessToken($token->access_token);
+        $user->setRefreshToken($token->refresh_token);
+        $em->persist($user);
+        $em->flush();
+        $this->doLogin($user, $request);
+        
+        return $this->render('ChoreizoBaseBundle:Paypal:redirect.html.twig', array('location' => $location));   	
+    }
+
+    protected function registerUser($userInfo)
+    {
+        $em = $this->getDoctrine()->getManager();
+       
+        $user = new User();
+        $user->setUsername($userInfo->email);
+        $user->setEmail($userInfo->email);
+        $user->setFirstName($userInfo->given_name);
+        $user->setLastName($userInfo->family_name);
+
+        $factory = $this->get('security.encoder_factory');
+
+        $encoder = $factory->getEncoder($user);
+
+        $password = $encoder->encodePassword(microtime(), $user->getSalt());
+
+        $user->setPassword($password);
+
+        $em->persist($user);
+        $em->flush();
+        return $user;
+    }
+
+    protected function doLogin($user, $request)
+    {
+        $session = $this->get('session');
+
+        $firewall = 'main';
+        $token = new UsernamePasswordToken($user->getUsername(), $user->getPassword(), $firewall, $user->getRoles());;
+        $session->set('_security_'.$firewall, serialize($token));
+        $session->save();
+
+        $event = new InteractiveLoginEvent($request, $token);
+        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+
     }
 }
